@@ -1,3 +1,4 @@
+import 'package:animations/animations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -28,12 +29,25 @@ class _HomeState extends State<Home> {
     var pages = <Widget>[
       ProgramPage(),
       const HomeworkPage(),
+      const Scaffold(),
     ];
 
+    // IndexedStack(
+    //       index: selectedIndex,
+    //       children: pages,
+    //     ),
+
     return Scaffold(
-      body: IndexedStack(
-        index: selectedIndex,
-        children: pages,
+      body: PageTransitionSwitcher(
+        transitionBuilder: (child, primaryAnimation, secondaryAnimation) {
+          return FadeThroughTransition(
+            fillColor: Theme.of(context).scaffoldBackgroundColor,
+            animation: primaryAnimation,
+            secondaryAnimation: secondaryAnimation,
+            child: child,
+          );
+        },
+        child: pages[selectedIndex],
       ),
       bottomNavigationBar: NavigationBar(
         selectedIndex: selectedIndex,
@@ -46,8 +60,6 @@ class _HomeState extends State<Home> {
           });
         },
         animationDuration: const Duration(milliseconds: 600),
-        elevation: 10,
-        height: 50 + MediaQuery.of(context).padding.bottom,
         destinations: const [
           NavigationDestination(
             icon: Icon(Icons.school_outlined),
@@ -58,6 +70,11 @@ class _HomeState extends State<Home> {
             icon: Icon(Icons.home_work_outlined),
             selectedIcon: Icon(Icons.home_work),
             label: 'Домашни',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.quiz_outlined),
+            selectedIcon: Icon(Icons.quiz),
+            label: 'Тестове',
           ),
         ],
       ),

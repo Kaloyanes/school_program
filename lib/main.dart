@@ -2,12 +2,15 @@ import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:get/get.dart';
 import 'package:school_program/home.dart';
 import 'package:school_program/themes.dart';
 
 void main() {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-  // Keep native splash screen up until app is finished bootstrapping
+
+  // widgetsBinding.renderView.automaticSystemUiAdjustment = false;
+
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
@@ -16,7 +19,6 @@ void main() {
   ));
 
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-
 
   runApp(const MyApp());
 
@@ -28,6 +30,7 @@ class MyApp extends StatelessWidget {
 
   static final _defaultLightColorScheme = ColorScheme.fromSeed(
     seedColor: Colors.deepPurple,
+    brightness: Brightness.light,
   );
 
   static final _defaultDarkColorScheme = ColorScheme.fromSeed(
@@ -40,8 +43,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return DynamicColorBuilder(
       builder: (lightDynamic, darkDynamic) {
-        return MaterialApp(
-          title: 'Flutter Demo',
+        return GetMaterialApp(
+          title: 'School Program',
           debugShowCheckedModeBanner: false,
           theme: Themes.light(lightDynamic ?? _defaultLightColorScheme),
           darkTheme: Themes.dark(darkDynamic ?? _defaultDarkColorScheme),

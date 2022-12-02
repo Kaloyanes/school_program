@@ -26,11 +26,6 @@ class PageBuilder extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         title: Text(day),
-        // shape: const RoundedRectangleBorder(
-        //   borderRadius: BorderRadius.vertical(
-        //     bottom: Radius.circular(30),
-        //   ),
-        // ),
       ),
       body: FutureBuilder(
         future: getFiles(),
