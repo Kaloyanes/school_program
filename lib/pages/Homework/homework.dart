@@ -1,13 +1,10 @@
 import 'package:animations/animations.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:school_program/models/homework.dart';
-import 'package:school_program/pages/Homework/add_homework.dart';
-import 'package:school_program/themes.dart';
+import 'package:school_program/pages/homework/add_homework.dart';
 
 class HomeworkPage extends StatefulWidget {
   const HomeworkPage({Key? key}) : super(key: key);
@@ -19,7 +16,7 @@ class HomeworkPage extends StatefulWidget {
 class _HomeworkPageState extends State<HomeworkPage> {
   bool _fabVisible = true;
 
-  final Duration _duration = const Duration(milliseconds: 300);
+  final Duration _duration = const Duration(milliseconds: 600);
 
   DateFormat formatter = DateFormat('dd/MM/yyyy');
   List<Homework> homework = [
@@ -88,7 +85,10 @@ class _HomeworkPageState extends State<HomeworkPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: app_bar(),
+      appBar: AppBar(
+        title: const Text("Домашни"),
+        centerTitle: true,
+      ),
       body: NotificationListener<UserScrollNotification>(
         onNotification: (notification) {
           final ScrollDirection direction = notification.direction;
@@ -104,7 +104,6 @@ class _HomeworkPageState extends State<HomeworkPage> {
           return true;
         },
         child: ListView.builder(
-          physics: const BouncingScrollPhysics(),
           itemCount: homework.length,
           itemBuilder: (context, index) {
             return Card(
@@ -118,29 +117,6 @@ class _HomeworkPageState extends State<HomeworkPage> {
         ),
       ),
       floatingActionButton: animated_fab_button(context),
-    );
-  }
-
-  AppBar app_bar() {
-    return AppBar(
-      title: const Text("Домашни"),
-      centerTitle: true,
-      actions: [
-        IconButton(
-          onPressed: () {
-            printInfo(info: Get.isDarkMode.toString());
-
-            setState(() {
-              if (Get.isDarkMode) {
-                Get.changeThemeMode(ThemeMode.light);
-              } else {
-                Get.changeThemeMode(ThemeMode.dark);
-              }
-            });
-          },
-          icon: Icon(Get.isDarkMode ? Icons.dark_mode : Icons.light_mode),
-        ),
-      ],
     );
   }
 

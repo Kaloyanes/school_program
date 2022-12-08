@@ -2,9 +2,9 @@ import 'package:animations/animations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:school_program/components/page_builder.dart';
-import 'package:school_program/pages/Homework.dart';
-import 'package:school_program/pages/Program.dart';
+import 'package:school_program/pages/homework/homework.dart';
+import 'package:school_program/pages/program/program.dart';
+import 'package:school_program/pages/settings/settings.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -30,17 +30,14 @@ class _HomeState extends State<Home> {
       ProgramPage(),
       const HomeworkPage(),
       const Scaffold(),
+      const SettingsPage()
     ];
-
-    // IndexedStack(
-    //       index: selectedIndex,
-    //       children: pages,
-    //     ),
 
     return Scaffold(
       body: PageTransitionSwitcher(
         transitionBuilder: (child, primaryAnimation, secondaryAnimation) {
-          return FadeThroughTransition(
+          return SharedAxisTransition(
+            transitionType: SharedAxisTransitionType.vertical,
             fillColor: Theme.of(context).scaffoldBackgroundColor,
             animation: primaryAnimation,
             secondaryAnimation: secondaryAnimation,
@@ -56,8 +53,8 @@ class _HomeState extends State<Home> {
 
           setState(() {
             selectedIndex = value;
-            // Change currentPage with animation
           });
+          HapticFeedback.selectionClick();
         },
         animationDuration: const Duration(milliseconds: 600),
         destinations: const [
@@ -75,6 +72,11 @@ class _HomeState extends State<Home> {
             icon: Icon(Icons.quiz_outlined),
             selectedIcon: Icon(Icons.quiz),
             label: 'Тестове',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.settings_outlined),
+            selectedIcon: Icon(Icons.settings),
+            label: 'Настройки',
           ),
         ],
       ),

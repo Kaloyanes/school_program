@@ -3,11 +3,12 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:school_program/components/break_tile.dart';
-import 'package:school_program/components/subject_tile.dart';
 import 'package:school_program/models/day.dart';
 import 'package:school_program/models/subject.dart';
+import 'package:school_program/pages/program/components/subject_tile.dart';
 import 'package:share_plus/share_plus.dart';
+
+import 'break_tile.dart';
 
 class PageBuilder extends StatelessWidget {
   PageBuilder({Key? key, required this.day, this.isPage = false})
@@ -31,7 +32,6 @@ class PageBuilder extends StatelessWidget {
         future: getFiles(),
         builder: (context, snapshot) {
           return ListView.builder(
-            physics: const BouncingScrollPhysics(),
             itemCount: subjects.length,
             itemBuilder: (context, index) {
               if (snapshot.hasError) {

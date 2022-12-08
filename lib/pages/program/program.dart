@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:school_program/components/page_builder.dart';
+import 'package:school_program/pages/program/components/page_builder.dart';
 
 class ProgramPage extends StatelessWidget {
   ProgramPage({Key? key}) : super(key: key);
@@ -10,7 +10,6 @@ class ProgramPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return PageView(
       pageSnapping: true,
-      physics: const BouncingScrollPhysics(),
       controller: PageController(
         initialPage: initialPage,
       ),
