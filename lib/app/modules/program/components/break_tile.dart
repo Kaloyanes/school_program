@@ -7,11 +7,19 @@ class BreakTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: Theme.of(context).colorScheme.secondaryContainer,
+    return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      shape: RoundedRectangleBorder(
+      decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
+        color: Theme.of(context).colorScheme.secondaryContainer,
+        boxShadow: [
+          BoxShadow(
+            color: Theme.of(context).colorScheme.secondaryContainer,
+            spreadRadius: 0.5,
+            blurRadius: 16,
+            offset: Offset.zero,
+          )
+        ],
       ),
       child: Padding(
         padding: const EdgeInsets.all(15),
@@ -21,12 +29,12 @@ class BreakTile extends StatelessWidget {
             Text(
               minutes.toString(),
               style:
-                  Theme.of(context).textTheme.subtitle1!.copyWith(fontSize: 20),
+                  Theme.of(context).textTheme.bodyLarge!.copyWith(fontSize: 20),
             ),
             Text(
               "минути",
               style:
-                  Theme.of(context).textTheme.subtitle1!.copyWith(fontSize: 20),
+                  Theme.of(context).textTheme.bodyLarge!.copyWith(fontSize: 20),
             ),
           ],
         ),

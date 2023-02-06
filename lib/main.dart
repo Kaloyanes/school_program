@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
+import 'package:school_program/app/modules/home/views/home_view.dart';
 import 'package:school_program/main_controller.dart';
-import 'package:school_program/pages/home.dart';
 import 'package:school_program/themes.dart';
 
 void main() {
@@ -70,10 +70,10 @@ class MyApp extends GetView<MainController> {
               debugShowCheckedModeBanner: false,
               theme: controller.lightTheme.value,
               darkTheme: controller.darkTheme.value,
-              home: const Home(),
-              onReady: () => controller.scrollBehaviorValue =
-                  const CupertinoScrollBehavior(),
-              scrollBehavior: controller.scrollBehavior.value,
+              home: const HomeView(),
+              scrollBehavior: CupertinoScrollBehavior(),
+              defaultTransition: Transition.native,
+              themeMode: ThemeMode.system,
             );
           },
         );

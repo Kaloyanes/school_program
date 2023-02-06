@@ -17,9 +17,9 @@ class Subject {
 
   Future<void> setTeacher() async {
     final String response = await rootBundle.loadString('assets/teachers.json');
-    final data = await json.decode(response);
+    final Map<String, dynamic> data = await json.decode(response);
 
-    teacher = data[title];
+    teacher = data[title] ?? "";
   }
 
   @override

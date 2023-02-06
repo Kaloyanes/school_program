@@ -3,12 +3,12 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:school_program/models/day.dart';
-import 'package:school_program/models/subject.dart';
-import 'package:school_program/pages/program/components/subject_tile.dart';
+import 'package:school_program/app/models/day.dart';
+import 'package:school_program/app/models/subject.dart';
 import 'package:share_plus/share_plus.dart';
 
 import 'break_tile.dart';
+import 'subject_tile.dart';
 
 class PageBuilder extends StatelessWidget {
   PageBuilder({Key? key, required this.day, this.isPage = false})
@@ -24,48 +24,64 @@ class PageBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(day),
-      ),
-      body: FutureBuilder(
-        future: getFiles(),
-        builder: (context, snapshot) {
-          return ListView.builder(
-            itemCount: subjects.length,
-            itemBuilder: (context, index) {
-              if (snapshot.hasError) {
-                return Center(
-                  child: Text(snapshot.error.toString()),
+      body: NestedScrollView(
+        headerSliverBuilder: (context, innerBoxIsScrolled) => [
+          SliverAppBar.medium(
+            forceElevated: innerBoxIsScrolled,
+            centerTitle: true,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(
+                bottom: Radius.circular(30),
+              ),
+            ),
+            flexibleSpace: FlexibleSpaceBar(
+              title: Text(
+                day,
+              ),
+              centerTitle: true,
+            ),
+            stretch: true,
+          ),
+        ],
+        body: FutureBuilder(
+          future: getFiles(),
+          builder: (context, snapshot) {
+            return ListView.builder(
+              itemCount: subjects.length,
+              itemBuilder: (context, index) {
+                if (snapshot.hasError) {
+                  return Center(
+                    child: Text(snapshot.error.toString()),
+                  );
+                }
+
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+
+                if (index == 0 || index % 2 == 0) {
+                  return GestureDetector(
+                    onLongPress: () => shareSubject(subjects[index]),
+                    child: SubjectTile(
+                        subject: subjects[index], index: index ~/ 2),
+                  );
+                }
+
+                if (index != subjects.length - 1) {
+                  return BreakTile(int.parse(subjects[index]));
+                }
+
+                // Bottom padding
+                return Container(
+                  height: 10,
+                  color: Colors.transparent,
                 );
-              }
-
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-
-              if (index == 0 || index % 2 == 0) {
-                return GestureDetector(
-                  onLongPress: () => shareSubject(subjects[index]),
-                  child:
-                      SubjectTile(subject: subjects[index], index: index ~/ 2),
-                );
-              }
-
-              if (index != subjects.length - 1) {
-                return BreakTile(int.parse(subjects[index]));
-              }
-
-              // Bottom padding
-              return Container(
-                height: 10,
-                color: Colors.transparent,
-              );
-            },
-          );
-        },
+              },
+            );
+          },
+        ),
       ),
     );
   }

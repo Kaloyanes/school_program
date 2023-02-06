@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:school_program/pages/program/components/page_builder.dart';
+import 'package:school_program/app/modules/program/components/page_builder.dart';
 
-class ProgramPage extends StatelessWidget {
-  ProgramPage({Key? key}) : super(key: key);
+class ProgramView extends StatelessWidget {
+  ProgramView({Key? key}) : super(key: key);
 
   int initialPage = DateTime.now().weekday - 1;
 

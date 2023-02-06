@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -16,12 +14,23 @@ class SettingsController extends GetxController {
     super.onInit();
   }
 
-  var scroll = "Cupertino".obs;
-
   var mainController = Get.find<MainController>();
 
-  final darkMode = (Get.isPlatformDarkMode).obs;
-  set darkModeValue(bool value) => darkMode.value = value;
+  final themeGroupVal = 1.obs;
+  set setThemeGroupValue(int value) {
+    themeGroupVal.value = value;
+    switch (value) {
+      case 1:
+        Get.changeThemeMode(ThemeMode.system);
+        break;
+      case 2:
+        Get.changeThemeMode(ThemeMode.light);
+        break;
+      case 3:
+        Get.changeThemeMode(ThemeMode.dark);
+        break;
+    }
+  }
 
   void changeTheme(MaterialColor color) {
     HapticFeedback.mediumImpact();
@@ -38,34 +47,5 @@ class SettingsController extends GetxController {
 
     mainController.lightTheme.value = Themes.themeGen(colorScheme);
     mainController.darkTheme.value = Themes.themeGen(colorSchemeDark);
-  }
-
-  changeDarkMode(bool value) {
-    HapticFeedback.mediumImpact();
-
-    darkModeValue = value;
-    Get.changeThemeMode(value ? ThemeMode.dark : ThemeMode.light);
-    return;
-  }
-
-  void changeScrollBehavior(String? type) {
-    if (type == null) return;
-
-    print("type: $type");
-
-    ScrollBehavior scrollBehavior = const CupertinoScrollBehavior();
-    switch (type) {
-      case "cupertino":
-        scrollBehavior = const CupertinoScrollBehavior();
-        scroll.value = "cupertino";
-        break;
-      case "material":
-        scrollBehavior = const MaterialScrollBehavior();
-        scroll.value = "material";
-        break;
-    }
-
-    HapticFeedback.mediumImpact();
-    mainController.scrollBehaviorValue = scrollBehavior;
   }
 }
