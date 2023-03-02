@@ -1,14 +1,16 @@
+import 'package:animations/animations.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:school_program/app/modules/home/views/home_view.dart';
 import 'package:school_program/main_controller.dart';
 import 'package:school_program/themes.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
 
   // widgetsBinding.renderView.automaticSystemUiAdjustment = false;
@@ -18,9 +20,13 @@ void main() {
     statusBarColor: Colors.transparent,
     systemNavigationBarColor: Colors.transparent,
     systemNavigationBarDividerColor: Colors.transparent,
+    systemNavigationBarContrastEnforced: false,
   ));
 
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+
+  await GetStorage.init("settings");
+  await GetStorage.init("homeworks");
 
   runApp(const MyApp());
 
@@ -49,20 +55,32 @@ class MyApp extends GetView<MainController> {
       builder: (lightDynamic, darkDynamic) {
         return Obx(
           () {
+            controller.lightDynamicColorSchemeValue =
+                lightDynamic ?? _defaultLightColorScheme;
+
+            controller.darkDynamicColorSchemeValue =
+                darkDynamic ?? _defaultDarkColorScheme;
+
             if (controller.isDynamic.value) {
-              controller.lightDynamicColorSchemeValue =
-                  lightDynamic ?? _defaultLightColorScheme;
-
-              controller.darkDynamicColorSchemeValue =
-                  darkDynamic ?? _defaultDarkColorScheme;
-
-              controller.lightThemeValue =
-                  Themes.themeGen(lightDynamic ?? _defaultLightColorScheme);
+              controller.lightThemeValue = Themes.themeGen(
+                lightDynamic ?? _defaultLightColorScheme,
+              );
 
               controller.darkThemeValue = Themes.themeGen(
                 darkDynamic ?? _defaultDarkColorScheme,
                 darkMode: true,
               );
+            }
+            var themeMode = ThemeMode.system;
+
+            switch (GetStorage("settings").read("theme")) {
+              case 2:
+                themeMode = ThemeMode.light;
+                break;
+
+              case 3:
+                themeMode = ThemeMode.dark;
+                break;
             }
 
             return GetMaterialApp(
@@ -71,9 +89,16 @@ class MyApp extends GetView<MainController> {
               theme: controller.lightTheme.value,
               darkTheme: controller.darkTheme.value,
               home: const HomeView(),
-              scrollBehavior: CupertinoScrollBehavior(),
+              scrollBehavior: const CupertinoScrollBehavior(),
               defaultTransition: Transition.native,
-              themeMode: ThemeMode.system,
+              themeMode: themeMode,
+              smartManagement: SmartManagement.full,
+              locale: const Locale("bg", "BG"),
+              localizationsDelegates: const [
+                DefaultMaterialLocalizations.delegate,
+                DefaultWidgetsLocalizations.delegate,
+                DefaultCupertinoLocalizations.delegate,
+              ],
             );
           },
         );

@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:school_program/themes.dart';
 
 class MainController extends GetxController {
-  final isDynamic = true.obs;
+  final isDynamic = (GetStorage("settings").read<bool>("dynamic") ?? true).obs;
   set isDynamicValue(bool value) => isDynamic.value = value;
 
   final lightDynamicColorScheme =
@@ -16,19 +17,32 @@ class MainController extends GetxController {
     seedColor: Colors.deepPurple,
     brightness: Brightness.dark,
   ).obs;
+
   set darkDynamicColorSchemeValue(ColorScheme value) =>
       darkDynamicColorScheme.value = value;
 
-  final darkTheme = Themes.themeGen(ColorScheme.fromSeed(
-    seedColor: Colors.deepPurple,
-    brightness: Brightness.dark,
-  )).obs;
+  final darkTheme = Themes.themeGen(
+    ColorScheme.fromSeed(
+      seedColor: Color(
+        GetStorage("settings").read("color") ?? Colors.deepPurple.value,
+      ),
+      brightness: Brightness.dark,
+    ),
+  ).obs;
   set darkThemeValue(ThemeData value) => darkTheme.value = value;
 
-  final lightTheme =
-      Themes.themeGen(ColorScheme.fromSeed(seedColor: Colors.deepPurple)).obs;
+  final lightTheme = Themes.themeGen(
+    ColorScheme.fromSeed(
+      seedColor: Color(
+        GetStorage("settings").read("color") ?? Colors.deepPurple.value,
+      ),
+    ),
+  ).obs;
   set lightThemeValue(ThemeData value) => lightTheme.value = value;
 
-  final Rx<ScrollBehavior> scrollBehavior = const ScrollBehavior().obs;
-  set scrollBehaviorValue(ScrollBehavior value) => scrollBehavior.value = value;
+  @override
+  void onInit() {
+    print(GetStorage("settings").read("color"));
+    super.onInit();
+  }
 }
