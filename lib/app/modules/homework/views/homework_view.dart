@@ -20,25 +20,34 @@ class HomeworkView extends GetView<HomeworkController> {
       ),
       body: NotificationListener<UserScrollNotification>(
         onNotification: controller.scrolled,
-        child: ListView.builder(
-          itemCount: controller.homework.length,
-          itemBuilder: (context, index) {
-            return Card(
-              child: ListTile(
-                title: Text(controller.homework[index].title),
-                subtitle: Text(controller.homework[index].description),
-                trailing: Text(controller.formatter
-                    .format(controller.homework[index].dueDate)),
-              ),
-            );
-          },
+        child: Obx(
+          () => ListView.builder(
+            itemCount: controller.homework.length,
+            itemBuilder: (context, index) {
+              return Dismissible(
+                key: UniqueKey(),
+                onDismissed: (direction) => controller.removeHomework(index),
+                child: Card(
+                  child: ListTile(
+                    title: Text(controller.homework[index].title),
+                    subtitle: Text(controller.homework[index].description),
+                    trailing: Text(
+                      controller.formatter
+                          .format(controller.homework[index].dueDate),
+                      style: Theme.of(context).textTheme.labelLarge,
+                    ),
+                  ),
+                ),
+              );
+            },
+          ),
         ),
       ),
-      floatingActionButton: animated_fab_button(),
+      floatingActionButton: animatedFabButton(),
     );
   }
 
-  Widget animated_fab_button() {
+  Widget animatedFabButton() {
     return Obx(
       () => AnimatedSlide(
         duration: controller.duration,

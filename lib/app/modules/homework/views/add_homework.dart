@@ -5,9 +5,10 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:school_program/app/modules/homework/controllers/add_homework_controller.dart';
+import 'package:school_program/app/modules/homework/controllers/homework_controller.dart';
 
 class AddHomeworkPage extends GetView<AddHomeworkController> {
-  const AddHomeworkPage({Key? key}) : super(key: key);
+  AddHomeworkPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,20 +24,34 @@ class AddHomeworkPage extends GetView<AddHomeworkController> {
           padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
           child: Column(
             mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
+              Expanded(
+                child: Container(),
+              ),
               TextFormField(
+                controller: controller.title,
                 decoration: InputDecoration(
                   label: Text("Заглавие"),
                 ),
+                validator: (value) {
+                  if (value!.isEmpty) return "Попълнете полето";
+
+                  return null;
+                },
+                textInputAction: TextInputAction.next,
               ),
-              const Spacer(),
+              SizedBox(
+                height: 10,
+              ),
               TextFormField(
+                controller: controller.description,
                 decoration: InputDecoration(
                   label: Text("Описание"),
                 ),
               ),
-              const Spacer(),
+              SizedBox(
+                height: 10,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -48,52 +63,29 @@ class AddHomeworkPage extends GetView<AddHomeworkController> {
                     ),
                   ),
                   ElevatedButton(
-                    onPressed: () {
-                      HapticFeedback.lightImpact();
-                      showDatePicker(
-                        context: context,
-                        initialDate: controller.dueDate.value,
-                        firstDate: DateTime.now(),
-                        lastDate: DateTime.now().add(
-                          const Duration(days: 365),
-                        ),
-                      ).then((value) {
-                        controller.dueDate.value = value ?? DateTime.now();
-                      });
-                    },
+                    onPressed: () => controller.changeDate(),
                     child: const Text("Избери"),
                   )
                 ],
               ),
-              const Spacer(),
+              SizedBox(
+                height: 10,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   ElevatedButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                      Timer(
-                        const Duration(milliseconds: 300),
-                        () {
-                          ScaffoldMessenger.of(Get.context!).showSnackBar(
-                            SnackBar(
-                              duration: const Duration(seconds: 1),
-                              content: const Text("Домашното е добавено"),
-                            ),
-                          );
-                        },
-                      );
-                    },
-                    child: const Text("Добави"),
+                    onPressed: () => Get.back(),
+                    child: const Text("Откажи"),
                   ),
                   ElevatedButton(
-                    onPressed: () => Navigator.pop(context),
-                    child: const Text("Откажи"),
+                    onPressed: () => controller.addHomework(),
+                    child: const Text("Добави"),
                   ),
                 ],
               ),
-              const Spacer(
-                flex: 30,
+              Expanded(
+                child: Container(),
               )
             ],
           ),
