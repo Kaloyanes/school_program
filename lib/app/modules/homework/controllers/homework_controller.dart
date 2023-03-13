@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
@@ -17,10 +18,17 @@ class HomeworkController extends GetxController {
   final Duration duration = const Duration(milliseconds: 600);
 
   DateFormat formatter = DateFormat('dd/MM/yyyy');
-  final homework = [].obs;
+  final homework = <Homework>[].obs;
 
   @override
   void onInit() {
+    AwesomeNotifications().isNotificationAllowed().then(
+      (value) {
+        if (!value) {
+          AwesomeNotifications().requestPermissionToSendNotifications();
+        }
+      },
+    );
     loadHomework();
     super.onInit();
   }
@@ -35,6 +43,10 @@ class HomeworkController extends GetxController {
     for (var homew in homeworks) {
       homework.add(Homework.fromJson(homew));
     }
+
+    homework.sort(
+      (a, b) => a.dueDate.compareTo(b.dueDate),
+    );
   }
 
   bool scrolled(UserScrollNotification notification) {
@@ -49,7 +61,42 @@ class HomeworkController extends GetxController {
     return true;
   }
 
-  void addHomework(String title, String description, DateTime dueDate) {
+  Future<void> addHomework(
+      String title, String description, DateTime dueDate) async {
+    await AwesomeNotifications().createNotification(
+      content: NotificationContent(
+        id: 10,
+        channelKey: "homeworkChannel",
+        criticalAlert: true,
+        title: title,
+        body: description,
+        notificationLayout: NotificationLayout.Inbox,
+        icon: null,
+        displayOnBackground: true,
+        wakeUpScreen: true,
+        showWhen: false,
+      ),
+      schedule: NotificationCalendar.fromDate(
+          date: DateTime(dueDate.year, dueDate.month, dueDate.day - 1, 9, 30)),
+    );
+
+    await AwesomeNotifications().createNotification(
+      content: NotificationContent(
+        id: 11,
+        channelKey: "homeworkChannel",
+        criticalAlert: true,
+        title: title,
+        body: description,
+        notificationLayout: NotificationLayout.Inbox,
+        icon: null,
+        displayOnBackground: true,
+        wakeUpScreen: true,
+        showWhen: false,
+      ),
+      schedule: NotificationCalendar.fromDate(
+          date: DateTime(dueDate.year, dueDate.month, dueDate.day, 9, 30)),
+    );
+
     homework.add(
       Homework(
         title: title,
@@ -57,14 +104,21 @@ class HomeworkController extends GetxController {
         dueDate: dueDate,
       ),
     );
+    homework.sort(
+      (a, b) => a.dueDate.compareTo(b.dueDate),
+    );
 
     homeworkStorage.write("homeworks", homework);
   }
 
-  void removeHomework(int index) {
-    homework.removeAt(index);
+  void removeHomework(Homework homeworkToRemove) {
+    homework.remove(homeworkToRemove);
+    homework.sort(
+      (a, b) => a.dueDate.compareTo(b.dueDate),
+    );
 
     homeworkStorage.write("homeworks", homework);
+
     ScaffoldMessenger.of(Get.context!).clearSnackBars();
     ScaffoldMessenger.of(Get.context!).showSnackBar(
       const SnackBar(

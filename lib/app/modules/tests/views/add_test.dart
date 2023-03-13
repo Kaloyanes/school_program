@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
-import 'package:school_program/app/modules/homework/controllers/add_homework_controller.dart';
+import 'package:school_program/app/modules/tests/controllers/add_test_controller.dart';
 
-class AddHomeworkPage extends GetView<AddHomeworkController> {
-  const AddHomeworkPage({Key? key}) : super(key: key);
+class AddTestView extends GetView<AddTestController> {
+  const AddTestView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Get.lazyPut(() => AddHomeworkController());
+    Get.lazyPut(() => AddTestController());
+
     return AlertDialog(
-      title: const Text("Добави домашна"),
+      title: const Text("Добави тест"),
       content: Form(
         key: controller.formKey,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -29,15 +30,6 @@ class AddHomeworkPage extends GetView<AddHomeworkController> {
                   return null;
                 },
                 textInputAction: TextInputAction.next,
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              TextFormField(
-                controller: controller.description,
-                decoration: const InputDecoration(
-                  label: Text("Описание"),
-                ),
               ),
               const SizedBox(
                 height: 10,

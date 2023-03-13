@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:school_program/app/models/day.dart';
 import 'package:school_program/app/models/subject.dart';
 import 'package:share_plus/share_plus.dart';
@@ -37,6 +37,7 @@ class PageBuilder extends StatelessWidget {
             flexibleSpace: FlexibleSpaceBar(
               title: Text(
                 day,
+                style: Theme.of(context).textTheme.headlineSmall,
               ),
               centerTitle: true,
             ),
@@ -46,39 +47,50 @@ class PageBuilder extends StatelessWidget {
         body: FutureBuilder(
           future: getFiles(),
           builder: (context, snapshot) {
-            return ListView.builder(
-              itemCount: subjects.length,
-              itemBuilder: (context, index) {
-                if (snapshot.hasError) {
-                  return Center(
-                    child: Text(snapshot.error.toString()),
-                  );
-                }
+            return ListView(
+              cacheExtent: 10000,
+              children: [
+                for (var index = 0; index < subjects.length; index++)
+                  Builder(
+                    builder: (context) {
+                      if (snapshot.hasError) {
+                        return Center(
+                          child: Text(snapshot.error.toString()),
+                        );
+                      }
 
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
 
-                if (index == 0 || index % 2 == 0) {
-                  return GestureDetector(
-                    onLongPress: () => shareSubject(subjects[index]),
-                    child: SubjectTile(
-                        subject: subjects[index], index: index ~/ 2),
-                  );
-                }
+                      if (index == 0 || index % 2 == 0) {
+                        return GestureDetector(
+                          onLongPress: () => shareSubject(subjects[index]),
+                          child: SubjectTile(
+                            subject: subjects[index],
+                            index: index ~/ 2,
+                          ),
+                        );
+                      }
 
-                if (index != subjects.length - 1) {
-                  return BreakTile(int.parse(subjects[index]));
-                }
+                      if (index != subjects.length - 1) {
+                        return BreakTile(int.parse(subjects[index]));
+                      }
 
-                // Bottom padding
-                return Container(
-                  height: 10,
-                  color: Colors.transparent,
-                );
-              },
+                      // Bottom padding
+                      return Container(
+                        height: 10,
+                        color: Colors.transparent,
+                      );
+                    },
+                  )
+              ].animate(interval: 50.ms).scaleXY(
+                    alignment: Alignment.bottomCenter,
+                    curve: Curves.fastLinearToSlowEaseIn,
+                    duration: 300.ms,
+                  ),
             );
           },
         ),

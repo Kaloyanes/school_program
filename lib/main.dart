@@ -1,4 +1,4 @@
-import 'package:animations/animations.dart';
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +27,26 @@ Future<void> main() async {
 
   await GetStorage.init("settings");
   await GetStorage.init("homeworks");
+  await GetStorage.init("tests");
+
+  await AwesomeNotifications().initialize(
+    null,
+    [
+      NotificationChannel(
+        channelKey: "homeworkChannel",
+        channelName: "homework",
+        channelDescription: "notificates about homeworks",
+        importance: NotificationImportance.Max,
+      ),
+      NotificationChannel(
+        channelKey: "testChannel",
+        channelName: "test",
+        channelDescription: "notificates about tests",
+        importance: NotificationImportance.Max,
+      ),
+    ],
+    debug: true,
+  );
 
   runApp(const MyApp());
 

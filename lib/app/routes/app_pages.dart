@@ -1,9 +1,11 @@
 import 'package:get/get.dart';
-import 'package:school_program/app/modules/settings/bindings/settings_binding.dart';
-import 'package:school_program/app/modules/settings/views/settings.dart';
 
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/settings/bindings/settings_binding.dart';
+import '../modules/settings/views/settings.dart';
+import '../modules/tests/bindings/tests_binding.dart';
+import '../modules/tests/views/tests_view.dart';
 
 part 'app_routes.dart';
 
@@ -22,6 +24,11 @@ class AppPages {
       name: _Paths.SETTINGS,
       page: () => const SettingsView(),
       binding: SettingsBinding(),
+    ),
+    GetPage(
+      name: _Paths.TESTS,
+      page: () => const TestsView(),
+      binding: TestsBinding(),
     ),
   ];
 }

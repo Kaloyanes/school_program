@@ -39,10 +39,4 @@ class MainController extends GetxController {
     ),
   ).obs;
   set lightThemeValue(ThemeData value) => lightTheme.value = value;
-
-  @override
-  void onInit() {
-    print(GetStorage("settings").read("color"));
-    super.onInit();
-  }
 }

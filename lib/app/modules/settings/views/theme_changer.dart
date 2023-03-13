@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:school_program/app/modules/settings/components/custom_color.dart';
 import 'package:school_program/app/modules/settings/controllers/settings_controller.dart';
 import 'package:school_program/main_controller.dart';
@@ -23,8 +24,8 @@ class ThemeChangerView extends StatelessWidget {
         tag: "theme",
         child: GridView.builder(
           itemCount: Colors.primaries.length,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: Get.width > 600 ? 5 : 3,
             // childAspectRatio: 1,
             mainAxisSpacing: 10,
           ),

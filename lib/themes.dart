@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:school_program/main_controller.dart';
 
 class Themes {
   static ThemeData themeGen(ColorScheme colorScheme, {bool darkMode = false}) {
     return ThemeData(
       useMaterial3: true,
       colorScheme: colorScheme,
-
-      textTheme: TextTheme(),
+      textTheme: const TextTheme(),
 
       // APP BAR
       appBarTheme: const AppBarTheme(
@@ -20,7 +17,6 @@ class Themes {
           ),
         ),
       ),
-
       inputDecorationTheme: InputDecorationTheme(
         alignLabelWithHint: true,
         border: OutlineInputBorder(
@@ -35,6 +31,11 @@ class Themes {
             color: colorScheme.primary,
             width: 3,
           ),
+        ),
+      ),
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(50),
         ),
       ),
     );
