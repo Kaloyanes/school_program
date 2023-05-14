@@ -28,6 +28,7 @@ Future<void> main() async {
   await GetStorage.init("settings");
   await GetStorage.init("homeworks");
   await GetStorage.init("tests");
+  await GetStorage.init("days");
 
   await AwesomeNotifications().initialize(
     null,
@@ -75,11 +76,9 @@ class MyApp extends GetView<MainController> {
       builder: (lightDynamic, darkDynamic) {
         return Obx(
           () {
-            controller.lightDynamicColorSchemeValue =
-                lightDynamic ?? _defaultLightColorScheme;
+            controller.lightDynamicColorSchemeValue = lightDynamic ?? _defaultLightColorScheme;
 
-            controller.darkDynamicColorSchemeValue =
-                darkDynamic ?? _defaultDarkColorScheme;
+            controller.darkDynamicColorSchemeValue = darkDynamic ?? _defaultDarkColorScheme;
 
             if (controller.isDynamic.value) {
               controller.lightThemeValue = Themes.themeGen(

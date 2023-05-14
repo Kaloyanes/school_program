@@ -2,6 +2,7 @@ import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:school_program/app/modules/settings/controllers/settings_controller.dart';
+import 'package:school_program/app/modules/settings/views/subject_changer.dart';
 import 'package:school_program/app/modules/settings/views/theme_changer.dart';
 import 'package:school_program/main_controller.dart';
 
@@ -18,8 +19,7 @@ class SettingsView extends GetView<SettingsController> {
         title: const Text("Настройки"),
       ),
       body: GestureDetector(
-        onPanDown: (details) =>
-            FocusScope.of(context).requestFocus(FocusNode()),
+        onPanDown: (details) => FocusScope.of(context).requestFocus(FocusNode()),
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
@@ -61,6 +61,30 @@ class SettingsView extends GetView<SettingsController> {
                     onPressed: () => action.call(),
                     icon: const Icon(Icons.change_circle),
                     label: const Text("Смени темата на приложението"),
+                  ),
+                ),
+                OpenContainer(
+                  transitionType: ContainerTransitionType.fade,
+                  transitionDuration: const Duration(milliseconds: 300),
+                  openShape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  openBuilder: (context, action) => const SubjectChanger(),
+                  closedElevation: 0,
+                  openElevation: 0,
+                  closedShape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25),
+                  ),
+                  openColor: Theme.of(context).colorScheme.background,
+                  middleColor: Color.alphaBlend(
+                    Theme.of(context).colorScheme.background,
+                    Colors.transparent,
+                  ),
+                  closedColor: Colors.transparent,
+                  closedBuilder: (context, action) => ElevatedButton.icon(
+                    onPressed: () => action.call(),
+                    icon: const Icon(Icons.edit),
+                    label: const Text("Промени часовете"),
                   ),
                 )
               ],

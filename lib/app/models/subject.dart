@@ -1,19 +1,16 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
 class Subject {
+  bool isBreak = false;
   String title;
   String teacher = "";
   DateTime startTime;
   DateTime endTime = DateTime.now();
 
-  Subject(this.title, this.startTime) {
-    endTime = startTime.add(const Duration(minutes: 40));
-    setTeacher();
-  }
+  Subject(this.title, this.startTime, this.endTime, this.teacher, {this.isBreak = false});
 
   Future<void> setTeacher() async {
     final String response = await rootBundle.loadString('assets/teachers.json');
