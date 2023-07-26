@@ -1,6 +1,6 @@
 # School Program - Mobile App for Organizing Your School Week
 
-Welcome to School Program, the ultimate mobile app designed with students in mind to help you organize your school week efficiently. With School Program, you can easily input your recurring weekly schedule from Monday to Friday, keep track of homework, and schedule important tests. The app will remind you one day before and on the day of the test with push notifications, ensuring you never miss a deadline. Additionally, School Program offers customizable themes, allowing you to choose between light and dark themes and pick your favorite color scheme.
+Welcome to School Program, the ultimate mobile app designed for students and teachers to help organize their school week efficiently. With School Program, you can easily input your recurring weekly schedule from Monday to Friday, keep track of homework, schedule important tests, and manage your classes as a teacher. The app will remind you one day before and on the day of the test with push notifications, ensuring you never miss a deadline. Additionally, School Program offers customizable themes, allowing you to choose between light and dark themes and pick your favorite color scheme.
 
 ## Table of Contents
 
@@ -15,17 +15,17 @@ Welcome to School Program, the ultimate mobile app designed with students in min
 
 ## Introduction
 
-School Program is a user-friendly mobile app that aims to simplify the life of students by providing a centralized platform to manage their school schedules, homework, and tests. Whether you are in high school or college, School Program will ensure you stay organized, never forget about important assignments, and stay on top of your academic responsibilities.
+School Program is a versatile mobile app that aims to simplify the lives of both students and teachers by providing a centralized platform to manage their school schedules, homework, tests, and classes. Whether you are a student or a teacher, School Program will ensure you stay organized, never forget about important assignments, and stay on top of your academic responsibilities.
 
 ## Features
 
-- **Recurring Weekly Schedule:** Input your weekly class schedule from Monday to Friday. Easily view your classes for each day, helping you plan your study sessions efficiently.
+- **Recurring Weekly Schedule:** Input your weekly class schedule from Monday to Friday. Teachers can manage their class timetable, and students can organize their class schedules, helping everyone plan their study sessions efficiently.
 
-- **Homework Management:** Keep track of your homework assignments in one place. Add, edit, and mark completed tasks to stay on top of your academic responsibilities.
+- **Homework Management:** Keep track of your homework assignments in one place. Add, edit, and mark completed tasks as a student, or assign and track homework as a teacher.
 
-- **Test Scheduling:** Schedule your upcoming tests and exams. Receive push notifications one day before and on the day of the test to help you prepare effectively.
+- **Test Scheduling:** Schedule upcoming tests and exams. Both students and teachers will receive push notifications one day before and on the day of the test to help them prepare effectively.
 
-- **Customizable Themes:** Personalize the app's appearance by choosing between light and dark themes. You can also select your preferred color scheme for a more enjoyable user experience.
+- **Customizable Themes:** Personalize the app's appearance by choosing between light and dark themes. Users can also select their preferred color scheme for a more enjoyable user experience.
 
 ## Getting Started
 
@@ -35,9 +35,9 @@ To get started with School Program, follow these steps:
 
 2. **Sign Up:** Create a new account or log in using your existing credentials. You may also have the option to sign up with your social media accounts.
 
-3. **Set Up Weekly Schedule:** Once you're logged in, navigate to the "Schedule" section and input your recurring classes for each day of the week.
+3. **Set Up Weekly Schedule:** Once you're logged in, navigate to the "Schedule" section and input your recurring classes for each day of the week. Teachers can manage their class timetable, and students can organize their class schedules.
 
-4. **Add Homeworks and Tests:** In the respective pages, add your homework assignments and upcoming tests with their due dates.
+4. **Add Homework and Tests:** In the respective pages, add your homework assignments and upcoming tests with their due dates. Teachers can assign homework and track students' progress as well.
 
 5. **Notifications:** Enable push notifications in the app settings to receive reminders one day before and on the day of your scheduled tests.
 
@@ -45,11 +45,11 @@ To get started with School Program, follow these steps:
 
 - **Home Screen:** The home screen displays your weekly schedule and any upcoming tests or homework assignments.
 
-- **Schedule:** View your recurring weekly schedule with classes listed for each day. Tap on a class to view more details or make changes.
+- **Schedule:** View your recurring weekly schedule with classes listed for each day. Tap on a class to view more details or make changes. Teachers can manage their class timetable and update class details.
 
-- **Homeworks:** Access the homework page to add new assignments, mark them as completed, or delete tasks.
+- **Homework:** Access the homework page to add new assignments, mark them as completed, or delete tasks. Teachers can assign homework to specific classes and track students' progress.
 
-- **Tests:** The tests page allows you to schedule upcoming exams, view their due dates, and receive reminders.
+- **Tests:** The tests page allows you to schedule upcoming exams, view their due dates, and receive reminders. Teachers can schedule tests for specific classes and notify students accordingly.
 
 - **Notifications:** The app will send you push notifications for test reminders based on your scheduled test dates.
 
