@@ -8,6 +8,7 @@ Welcome to School Program, the ultimate mobile app designed for students and tea
 - [Features](#features)
 - [Getting Started](#getting-started)
 - [How to Use](#how-to-use)
+- [Screenshots](#screenshots)
 - [Settings](#settings)
 - [Contributing](#contributing)
 - [Feedback](#feedback)
@@ -33,13 +34,37 @@ To get started with School Program, follow these steps:
 
 1. **Download the App:** Visit the App Store or Google Play Store and search for "School Program." Download and install the app on your mobile device.
 
-2. **Sign Up:** Create a new account or log in using your existing credentials. You may also have the option to sign up with your social media accounts.
+2. **Set Up Weekly Schedule:** Once you're logged in, navigate to the "Schedule" section and input your recurring classes for each day of the week. Teachers can manage their class timetable, and students can organize their class schedules.
 
-3. **Set Up Weekly Schedule:** Once you're logged in, navigate to the "Schedule" section and input your recurring classes for each day of the week. Teachers can manage their class timetable, and students can organize their class schedules.
+3. **Add Homework and Tests:** In the respective pages, add your homework assignments and upcoming tests with their due dates. Teachers can assign homework and track students' progress as well.
 
-4. **Add Homework and Tests:** In the respective pages, add your homework assignments and upcoming tests with their due dates. Teachers can assign homework and track students' progress as well.
+4. **Notifications:** Enable push notifications in the app settings to receive reminders one day before and on the day of your scheduled tests.
 
-5. **Notifications:** Enable push notifications in the app settings to receive reminders one day before and on the day of your scheduled tests.
+## Screenshots
+
+# Weekly schedule
+![Screenshot_20230809-215850](https://github.com/KaloyanStoyanov06/school_program/assets/51166786/7a295fe7-725c-4096-87e3-3da4bfd0208b)
+
+# Homeworks
+![Screenshot_20230809-215854](https://github.com/KaloyanStoyanov06/school_program/assets/51166786/f839d7b5-4859-45ac-bcc6-cea6c69645aa)
+
+# Tests
+![Screenshot_20230809-215859](https://github.com/KaloyanStoyanov06/school_program/assets/51166786/08798f45-054a-4308-89c5-34c9e9b6d9f6)
+
+# Settings In Which You Can Change Your Theme And Schedule
+![Screenshot_20230809-215902](https://github.com/KaloyanStoyanov06/school_program/assets/51166786/88a02619-fb4e-43b1-a0c8-5ba5a21ed79c)
+
+# Themes
+![Screenshot_20230809-215911](https://github.com/KaloyanStoyanov06/school_program/assets/51166786/931a7ead-17e9-4e7f-9ffa-b6fa69445f34)
+
+# Schedule Settings And Share To Friends
+![Screenshot_20230809-215917](https://github.com/KaloyanStoyanov06/school_program/assets/51166786/a440a150-8bdb-49f5-9216-54eb654249f7)
+
+# Load Schedules From Friends
+![Screenshot_20230809-215921](https://github.com/KaloyanStoyanov06/school_program/assets/51166786/f5e834f3-72a1-44e4-9712-764a580fb8a9)
+
+# Add Recurring Subject In Your Schedule
+![Screenshot_20230809-215933](https://github.com/KaloyanStoyanov06/school_program/assets/51166786/14a04b63-5b6a-4607-9326-0bb96df9d203)
 
 ## How to Use
 
